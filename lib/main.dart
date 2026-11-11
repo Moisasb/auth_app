@@ -1,23 +1,30 @@
+import 'package:auth_app/firebase_options.dart';
 import 'package:auth_app/widgets/screen/login_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  runApp(const authApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class authApp extends StatelessWidget {
+  const authApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Auth App',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+        colorSchemeSeed: Colors.indigo,
+        useMaterial3: true,
       ),
       home: const LoginScreen(),
     );
   }
 }
-
